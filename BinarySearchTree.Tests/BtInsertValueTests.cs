@@ -75,6 +75,32 @@ namespace BinarySearchTree.Tests
         }
 
         [Test]
+        public void DoesNotInsertDuplicates()
+        {
+            Assert.IsTrue(BtInsertValue.InsertNode(14, _binaryTree.Root));
+            Assert.IsFalse(BtInsertValue.InsertNode(14, _binaryTree.Root));
+
+            Assert.AreEqual(12, _binaryTree.Root.Value);
+            Assert.AreEqual(14, _binaryTree.Root.RightNode.Value);
+            Assert.IsNull(_binaryTree.Root.LeftNode);
+            Assert.IsNull(_binaryTree.Root.RightNode.RightNode);
+            Assert.IsNull(_binaryTree.Root.RightNode.LeftNode);
+
+            Assert.IsTrue(BtInsertValue.InsertNode(10, _binaryTree.Root));
+            Assert.IsFalse(BtInsertValue.InsertNode(10, _binaryTree.Root));
+
+            Assert.AreEqual(12, _binaryTree.Root.Value);
+            Assert.AreEqual(14, _binaryTree.Root.RightNode.Value);
+            Assert.AreEqual(10, _binaryTree.Root.LeftNode.Value);
+
+            Assert.IsNull(_binaryTree.Root.RightNode.RightNode);
+            Assert.IsNull(_binaryTree.Root.RightNode.LeftNode);
+
+            Assert.IsNull(_binaryTree.Root.LeftNode.RightNode);
+            Assert.IsNull(_binaryTree.Root.LeftNode.LeftNode);
+        }
+
+        [Test]
         public void InsertNodesCorrectlyForBst()
         {
             _binaryTree = new BinaryTree(8);
