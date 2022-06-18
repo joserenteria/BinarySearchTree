@@ -1,6 +1,6 @@
 ﻿namespace BinarySearchTree;
 
-public static class BtInsertValue
+public static class BtValueInserter
 {
     public static bool InsertNode(int value, Node node)
     {
@@ -31,6 +31,4 @@ public static class BtInsertValue
             return true;
         }
     }
-
-
 }

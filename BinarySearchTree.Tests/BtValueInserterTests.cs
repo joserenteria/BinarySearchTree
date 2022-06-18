@@ -3,7 +3,7 @@
 namespace BinarySearchTree.Tests
 {
     [TestFixture]
-    public class BtInsertValueTests
+    public class BtValueInserterTests
     {
         private BinaryTree _binaryTree;
 
@@ -25,17 +25,17 @@ namespace BinarySearchTree.Tests
         [Test]
         public void InsertOneLeftNode()
         {
-            Assert.IsTrue(BtInsertValue.InsertNode(5, _binaryTree.Root));
+            Assert.IsTrue(BtValueInserter.InsertNode(5, _binaryTree.Root));
             Assert.AreEqual(5, _binaryTree.Root.LeftNode.Value);
         }
 
         [Test]
         public void InsertMultipleLeftNodes()
         {
-            Assert.IsTrue(BtInsertValue.InsertNode(9, _binaryTree.Root));
-            Assert.IsTrue(BtInsertValue.InsertNode(6, _binaryTree.Root));
-            Assert.IsTrue(BtInsertValue.InsertNode(5, _binaryTree.Root));
-            Assert.IsTrue(BtInsertValue.InsertNode(2, _binaryTree.Root));
+            Assert.IsTrue(BtValueInserter.InsertNode(9, _binaryTree.Root));
+            Assert.IsTrue(BtValueInserter.InsertNode(6, _binaryTree.Root));
+            Assert.IsTrue(BtValueInserter.InsertNode(5, _binaryTree.Root));
+            Assert.IsTrue(BtValueInserter.InsertNode(2, _binaryTree.Root));
 
             var firstLevelNode = _binaryTree.Root.LeftNode;
             var secondLevelNode = firstLevelNode.LeftNode;
@@ -51,17 +51,17 @@ namespace BinarySearchTree.Tests
         [Test]
         public void InsertOneRightNode()
         {
-            Assert.IsTrue(BtInsertValue.InsertNode(14, _binaryTree.Root));
+            Assert.IsTrue(BtValueInserter.InsertNode(14, _binaryTree.Root));
             Assert.AreEqual(14, _binaryTree.Root.RightNode.Value);
         }
 
         [Test]
         public void InsertMultipleRightNodes()
         {
-            Assert.IsTrue(BtInsertValue.InsertNode(14, _binaryTree.Root));
-            Assert.IsTrue(BtInsertValue.InsertNode(19, _binaryTree.Root));
-            Assert.IsTrue(BtInsertValue.InsertNode(22, _binaryTree.Root));
-            Assert.IsTrue(BtInsertValue.InsertNode(30, _binaryTree.Root));
+            Assert.IsTrue(BtValueInserter.InsertNode(14, _binaryTree.Root));
+            Assert.IsTrue(BtValueInserter.InsertNode(19, _binaryTree.Root));
+            Assert.IsTrue(BtValueInserter.InsertNode(22, _binaryTree.Root));
+            Assert.IsTrue(BtValueInserter.InsertNode(30, _binaryTree.Root));
 
             var firstLevelNode = _binaryTree.Root.RightNode;
             var secondLevelNode = firstLevelNode.RightNode;
@@ -77,8 +77,8 @@ namespace BinarySearchTree.Tests
         [Test]
         public void DoesNotInsertDuplicates()
         {
-            Assert.IsTrue(BtInsertValue.InsertNode(14, _binaryTree.Root));
-            Assert.IsFalse(BtInsertValue.InsertNode(14, _binaryTree.Root));
+            Assert.IsTrue(BtValueInserter.InsertNode(14, _binaryTree.Root));
+            Assert.IsFalse(BtValueInserter.InsertNode(14, _binaryTree.Root));
 
             Assert.AreEqual(12, _binaryTree.Root.Value);
             Assert.AreEqual(14, _binaryTree.Root.RightNode.Value);
@@ -86,8 +86,8 @@ namespace BinarySearchTree.Tests
             Assert.IsNull(_binaryTree.Root.RightNode.RightNode);
             Assert.IsNull(_binaryTree.Root.RightNode.LeftNode);
 
-            Assert.IsTrue(BtInsertValue.InsertNode(10, _binaryTree.Root));
-            Assert.IsFalse(BtInsertValue.InsertNode(10, _binaryTree.Root));
+            Assert.IsTrue(BtValueInserter.InsertNode(10, _binaryTree.Root));
+            Assert.IsFalse(BtValueInserter.InsertNode(10, _binaryTree.Root));
 
             Assert.AreEqual(12, _binaryTree.Root.Value);
             Assert.AreEqual(14, _binaryTree.Root.RightNode.Value);
@@ -105,11 +105,11 @@ namespace BinarySearchTree.Tests
         {
             _binaryTree = new BinaryTree(8);
 
-            Assert.IsTrue(BtInsertValue.InsertNode(3, _binaryTree.Root));
-            Assert.IsTrue(BtInsertValue.InsertNode(10, _binaryTree.Root));
-            Assert.IsTrue(BtInsertValue.InsertNode(1, _binaryTree.Root));
-            Assert.IsTrue(BtInsertValue.InsertNode(6, _binaryTree.Root));
-            Assert.IsTrue(BtInsertValue.InsertNode(4, _binaryTree.Root));
+            Assert.IsTrue(BtValueInserter.InsertNode(3, _binaryTree.Root));
+            Assert.IsTrue(BtValueInserter.InsertNode(10, _binaryTree.Root));
+            Assert.IsTrue(BtValueInserter.InsertNode(1, _binaryTree.Root));
+            Assert.IsTrue(BtValueInserter.InsertNode(6, _binaryTree.Root));
+            Assert.IsTrue(BtValueInserter.InsertNode(4, _binaryTree.Root));
 
             var rootRight = _binaryTree.Root.RightNode;
             var rootLeft = _binaryTree.Root.LeftNode;
