@@ -6,6 +6,9 @@ public static class BtInsertValue
     {
         while (true)
         {
+            if (value == node.Value)
+                return false;
+
             if (value < node.Value)
             {
                 if (node.LeftNode == null)
@@ -18,9 +21,6 @@ public static class BtInsertValue
                 continue;
             }
 
-            if (value <= node.Value)
-                return false;
-
             if (node.RightNode != null)
             {
                 node = node.RightNode;
@@ -31,4 +31,6 @@ public static class BtInsertValue
             return true;
         }
     }
+
+
 }
