@@ -12,4 +12,15 @@ public static class BtTraversal
             TraversePreOrder(rootNode.RightNode, preOrderedValues);
         }
     }
+
+    //left child -> parent ->  right child
+    public static void TraverseInOrder(Node rootNode, List<int> inOrderedValues)
+    {
+        if (rootNode != null)
+        {
+            TraverseInOrder(rootNode.LeftNode, inOrderedValues);
+            inOrderedValues.Add(rootNode.Value);
+            TraverseInOrder(rootNode.RightNode, inOrderedValues);
+        }
+    }
 }
