@@ -34,4 +34,32 @@ public static class BtTraversal
             postOrderedValues.Add(rootNode.Value);
         }
     }
+
+    //Parent(s)-> left child -> right child
+    public static void TraverseBreadthFirst(Node rootNode, List<int> breadthFirstValues)
+    {
+        var nodes = new Queue<Node>();
+
+        if (rootNode != null)
+            nodes.Enqueue(rootNode);
+
+        while (nodes.Count > 0)
+        {
+            var tempNode = nodes.Dequeue();
+            breadthFirstValues.Add(tempNode.Value);
+
+            if (tempNode.LeftNode != null)
+                nodes.Enqueue(tempNode.LeftNode);
+            if (tempNode.RightNode != null)
+                nodes.Enqueue(tempNode.RightNode);
+        }
+    }
+
+    public static int TreeHeight(Node node)
+    {
+        if (node == null)
+            return 0;
+
+        return 1 + Math.Max(TreeHeight(node.LeftNode), TreeHeight(node.RightNode));
+    }
 }
