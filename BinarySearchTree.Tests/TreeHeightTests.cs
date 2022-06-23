@@ -6,34 +6,34 @@ namespace BinarySearchTree.Tests;
 public class TreeHeightTests
 {
     [Test]
-    public void TreeWithNoRootReturnsZero()
+    public void TreeWithNoRootReturnsNegativeOne()
     {
         var binaryTree = new BinaryTree(12);
         binaryTree.Root = null;
+
+        Assert.AreEqual(-1, BtTraversal.TreeHeight(binaryTree.Root));
+    }
+
+    [Test]
+    public void TreeWithOnlyRootReturnsZero()
+    {
+        var binaryTree = new BinaryTree(12);
 
         Assert.AreEqual(0, BtTraversal.TreeHeight(binaryTree.Root));
     }
 
     [Test]
-    public void TreeWithOnlyRootReturnsOne()
-    {
-        var binaryTree = new BinaryTree(12);
-
-        Assert.AreEqual(1, BtTraversal.TreeHeight(binaryTree.Root));
-    }
-
-    [Test]
-    public void TreeWithTwoLevelReturnsTwo()
+    public void TreeWithTwoLevelReturnsOne()
     {
         var binaryTree = new BinaryTree(50);
         BtValueInserter.InsertNode(25, binaryTree.Root);
         BtValueInserter.InsertNode(75, binaryTree.Root);
 
-        Assert.AreEqual(2, BtTraversal.TreeHeight(binaryTree.Root));
+        Assert.AreEqual(1, BtTraversal.TreeHeight(binaryTree.Root));
     }
 
     [Test]
-    public void TreeWithThreeLevelsReturnsThree()
+    public void TreeWithThreeLevelsReturnsTwo()
     {
         var binaryTree = new BinaryTree(50);
         BtValueInserter.InsertNode(25, binaryTree.Root);
@@ -43,7 +43,7 @@ public class TreeHeightTests
         BtValueInserter.InsertNode(65, binaryTree.Root);
         BtValueInserter.InsertNode(90, binaryTree.Root);
 
-        Assert.AreEqual(3, BtTraversal.TreeHeight(binaryTree.Root));
+        Assert.AreEqual(2, BtTraversal.TreeHeight(binaryTree.Root));
     }
 
     [TestCase(12)]
@@ -54,7 +54,7 @@ public class TreeHeightTests
     [TestCase(70)]
     [TestCase(80)]
     [TestCase(100)]
-    public void LopsidedTreeWithFourLevelsReturnsFour(int leaf)
+    public void LopsidedTreeWithFourLevelsReturnsThree(int leaf)
     {
         var binaryTree = new BinaryTree(50);
         BtValueInserter.InsertNode(25, binaryTree.Root);
@@ -65,11 +65,11 @@ public class TreeHeightTests
         BtValueInserter.InsertNode(90, binaryTree.Root);
         BtValueInserter.InsertNode(leaf, binaryTree.Root);
 
-        Assert.AreEqual(4, BtTraversal.TreeHeight(binaryTree.Root));
+        Assert.AreEqual(3, BtTraversal.TreeHeight(binaryTree.Root));
     }
 
     [Test]
-    public void OnlyLeftSubtreeLopsidedWithFourLevelsReturnsFour()
+    public void OnlyLeftSubtreeLopsidedWithFourLevelsReturnsThree()
     {
         var binaryTree = new BinaryTree(50);
         BtValueInserter.InsertNode(25, binaryTree.Root);
@@ -80,11 +80,11 @@ public class TreeHeightTests
         BtValueInserter.InsertNode(8, binaryTree.Root);
         BtValueInserter.InsertNode(7, binaryTree.Root);
 
-        Assert.AreEqual(8, BtTraversal.TreeHeight(binaryTree.Root));
+        Assert.AreEqual(7, BtTraversal.TreeHeight(binaryTree.Root));
     }
 
     [Test]
-    public void OnlyRightSubtreeLopsidedWithFourLevelsReturnsFour()
+    public void OnlyRightSubtreeLopsidedWithFourLevelsReturnsThree()
     {
         var binaryTree = new BinaryTree(50);
         BtValueInserter.InsertNode(75, binaryTree.Root);
@@ -95,11 +95,11 @@ public class TreeHeightTests
         BtValueInserter.InsertNode(103, binaryTree.Root);
         BtValueInserter.InsertNode(104, binaryTree.Root);
 
-        Assert.AreEqual(8, BtTraversal.TreeHeight(binaryTree.Root));
+        Assert.AreEqual(7, BtTraversal.TreeHeight(binaryTree.Root));
     }
 
     [Test]
-    public void LeftRightLeftRightReturnsFive()
+    public void LeftRightLeftRightReturnsFour()
     {
         var binaryTree = new BinaryTree(50);
         BtValueInserter.InsertNode(25, binaryTree.Root);
@@ -110,11 +110,11 @@ public class TreeHeightTests
         BtValueInserter.InsertNode(103, binaryTree.Root);
         BtValueInserter.InsertNode(104, binaryTree.Root);
 
-        Assert.AreEqual(5, BtTraversal.TreeHeight(binaryTree.Root));
+        Assert.AreEqual(4, BtTraversal.TreeHeight(binaryTree.Root));
     }
 
     [Test]
-    public void RightLeftRightLeftReturnsFive()
+    public void RightLeftRightLeftReturnsFour()
     {
         var binaryTree = new BinaryTree(50);
         BtValueInserter.InsertNode(75, binaryTree.Root);
@@ -125,6 +125,6 @@ public class TreeHeightTests
         BtValueInserter.InsertNode(15, binaryTree.Root);
         BtValueInserter.InsertNode(12, binaryTree.Root);
 
-        Assert.AreEqual(5, BtTraversal.TreeHeight(binaryTree.Root));
+        Assert.AreEqual(4, BtTraversal.TreeHeight(binaryTree.Root));
     }
 }

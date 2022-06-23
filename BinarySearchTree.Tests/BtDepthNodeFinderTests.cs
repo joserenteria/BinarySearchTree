@@ -22,7 +22,7 @@ public class BtDepthNodeFinderTests
         var binaryTree = new BinaryTree(12);
         binaryTree.Root = null;
 
-        BtDepthNodeFinder.Finder(binaryTree.Root, _nodeDepths, depth);
+        BtDepthNodeFinder.Find(binaryTree.Root, _nodeDepths);
         Assert.IsEmpty(_nodeDepths);
     }
 
@@ -31,9 +31,9 @@ public class BtDepthNodeFinderTests
     {
         var binaryTree = new BinaryTree(50);
 
-        BtDepthNodeFinder.Finder(binaryTree.Root, _nodeDepths, depth);
+        BtDepthNodeFinder.Find(binaryTree.Root, _nodeDepths);
 
-        Assert.AreEqual("[50, 1]", string.Join(',', _nodeDepths));
+        Assert.AreEqual("[50, 0]", string.Join(',', _nodeDepths));
     }
 
     [Test]
@@ -43,9 +43,9 @@ public class BtDepthNodeFinderTests
         BtValueInserter.InsertNode(25, binaryTree.Root);
         BtValueInserter.InsertNode(75, binaryTree.Root);
 
-        BtDepthNodeFinder.Finder(binaryTree.Root, _nodeDepths, depth);
+        BtDepthNodeFinder.Find(binaryTree.Root, _nodeDepths);
 
-        Assert.AreEqual("[25, 2],[75, 2]", string.Join(',', _nodeDepths));
+        Assert.AreEqual("[25, 1],[75, 1]", string.Join(',', _nodeDepths));
     }
 
     [Test]
@@ -53,11 +53,10 @@ public class BtDepthNodeFinderTests
     {
         BinaryTreeInitialSetupWithThreeLevels();
 
-        BtDepthNodeFinder.Finder(_binaryTree.Root, _nodeDepths, depth);
+        BtDepthNodeFinder.Find(_binaryTree.Root, _nodeDepths);
 
-        Assert.AreEqual("[15, 3],[40, 3],[65, 3],[90, 3]", string.Join(',', _nodeDepths));
+        Assert.AreEqual("[15, 2],[40, 2],[65, 2],[90, 2]", string.Join(',', _nodeDepths));
     }
-
 
     [Test]
     public void ThirdLevelLeftChildrenReturnsCorrectSequence()
@@ -68,9 +67,9 @@ public class BtDepthNodeFinderTests
         BtValueInserter.InsertNode(60, _binaryTree.Root);
         BtValueInserter.InsertNode(80, _binaryTree.Root);
 
-        BtDepthNodeFinder.Finder(_binaryTree.Root, _nodeDepths, depth);
+        BtDepthNodeFinder.Find(_binaryTree.Root, _nodeDepths);
 
-        Assert.AreEqual("[12, 4],[30, 4],[60, 4],[80, 4]", string.Join(',', _nodeDepths));
+        Assert.AreEqual("[12, 3],[30, 3],[60, 3],[80, 3]", string.Join(',', _nodeDepths));
     }
 
     [Test]
@@ -82,9 +81,9 @@ public class BtDepthNodeFinderTests
         BtValueInserter.InsertNode(70, _binaryTree.Root);
         BtValueInserter.InsertNode(100, _binaryTree.Root);
 
-        BtDepthNodeFinder.Finder(_binaryTree.Root, _nodeDepths, depth);
+        BtDepthNodeFinder.Find(_binaryTree.Root, _nodeDepths);
 
-        Assert.AreEqual("[20, 4],[45, 4],[70, 4],[100, 4]", string.Join(',', _nodeDepths));
+        Assert.AreEqual("[20, 3],[45, 3],[70, 3],[100, 3]", string.Join(',', _nodeDepths));
     }
 
     [Test]
@@ -96,10 +95,11 @@ public class BtDepthNodeFinderTests
         BtValueInserter.InsertNode(70, _binaryTree.Root);
         BtValueInserter.InsertNode(80, _binaryTree.Root);
 
-        BtDepthNodeFinder.Finder(_binaryTree.Root, _nodeDepths, depth);
+        BtDepthNodeFinder.Find(_binaryTree.Root, _nodeDepths);
 
-        Assert.AreEqual("[12, 4],[45, 4],[70, 4],[80, 4]", string.Join(',', _nodeDepths));
+        Assert.AreEqual("[12, 3],[45, 3],[70, 3],[80, 3]", string.Join(',', _nodeDepths));
     }
+
     [TestCase(12)]
     [TestCase(20)]
     [TestCase(30)]
@@ -113,10 +113,51 @@ public class BtDepthNodeFinderTests
         BinaryTreeInitialSetupWithThreeLevels();
         BtValueInserter.InsertNode(leaf, _binaryTree.Root);
 
-        BtDepthNodeFinder.Finder(_binaryTree.Root, _nodeDepths, depth);
+        BtDepthNodeFinder.Find(_binaryTree.Root, _nodeDepths);
 
-        Assert.AreEqual(4, _nodeDepths.Count());
-        Assert.That(_nodeDepths[leaf] == 4);
+        Assert.AreEqual(1, _nodeDepths.Count());
+        Assert.That(_nodeDepths[leaf] == 3);
+    }
+
+    [Test]
+    public void RightLeftRightLeftReturnsOneNode()
+    {
+        var binaryTree = new BinaryTree(50);
+        BtValueInserter.InsertNode(75, binaryTree.Root);
+        BtValueInserter.InsertNode(65, binaryTree.Root);
+        BtValueInserter.InsertNode(70, binaryTree.Root);
+        BtValueInserter.InsertNode(66, binaryTree.Root);
+
+        BtDepthNodeFinder.Find(binaryTree.Root, _nodeDepths);
+
+        Assert.AreEqual("[66, 4]", string.Join(',', _nodeDepths));
+    }
+
+    [Test]
+    public void TestChallengeNumberOneExample()
+    {
+        var binaryTree = new BinaryTree(12);
+        BtValueInserter.InsertNode(11, binaryTree.Root);
+        BtValueInserter.InsertNode(90, binaryTree.Root);
+        BtValueInserter.InsertNode(82, binaryTree.Root);
+        BtValueInserter.InsertNode(7, binaryTree.Root);
+        BtValueInserter.InsertNode(9, binaryTree.Root);
+
+        BtDepthNodeFinder.Find(binaryTree.Root, _nodeDepths);
+        Assert.AreEqual("[9, 3]", string.Join(',', _nodeDepths));
+    }
+
+    [Test]
+    public void TestChallengeNumberTwoExample()
+    {
+        var binaryTree = new BinaryTree(26);
+        BtValueInserter.InsertNode(82, binaryTree.Root);
+        BtValueInserter.InsertNode(16, binaryTree.Root);
+        BtValueInserter.InsertNode(92, binaryTree.Root);
+        BtValueInserter.InsertNode(33, binaryTree.Root);
+
+        BtDepthNodeFinder.Find(binaryTree.Root, _nodeDepths);
+        Assert.AreEqual("[92, 2],[33, 2]", string.Join(',', _nodeDepths));
     }
 
     private static void BinaryTreeInitialSetupWithThreeLevels()

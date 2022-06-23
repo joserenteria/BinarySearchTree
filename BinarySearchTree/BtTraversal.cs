@@ -58,7 +58,7 @@ public static class BtTraversal
     public static int TreeHeight(Node node)
     {
         if (node == null)
-            return 0;
+            return -1;
 
         return 1 + Math.Max(TreeHeight(node.LeftNode), TreeHeight(node.RightNode));
     }
